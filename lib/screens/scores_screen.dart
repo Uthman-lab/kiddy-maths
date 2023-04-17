@@ -7,7 +7,6 @@ import 'package:kiddy_maths/screens/home_screen.dart';
 import 'package:kiddy_maths/screens/levels_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 
-import '../controllers/stageController.dart';
 
 class ScoresScreen extends StatelessWidget {
   const ScoresScreen({super.key});
@@ -48,7 +47,7 @@ class ScoreBoard extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("level ${ref.watch(level)}"),
+              Text("level"),
               const SizedBox(
                 height: 20,
               ),
@@ -56,7 +55,7 @@ class ScoreBoard extends ConsumerWidget {
               const SizedBox(
                 height: 20,
               ),
-              Text("${ref.watch(scoreController)}"),
+              Text(""),
               const SizedBox(
                 height: 20,
               ),

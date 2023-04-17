@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kiddy_maths/business_logic/quiz_generator.dart';
-import 'package:kiddy_maths/controllers/stageController.dart';
 import 'package:kiddy_maths/screens/levels_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 import 'package:kiddy_maths/widgets/background.dart';
@@ -81,7 +80,6 @@ class OperatorButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     selectOperatorAndNavigate() {
       Operation newOperator = operator["operator"] as Operation;
-      ref.read(operation.notifier).selectOperator(newOperator);
       MyNavigator.goto(context, const LevelsScreen());
     }
 

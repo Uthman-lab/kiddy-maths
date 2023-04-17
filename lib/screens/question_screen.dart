@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kiddy_maths/controllers/stageController.dart';
 import 'package:kiddy_maths/screens/home_screen.dart';
 import 'package:kiddy_maths/screens/scores_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
@@ -20,8 +19,7 @@ class Questionscreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int questionIndex = ref.watch(questionCount);
-    Question question = questions[questionIndex];
+   
     return Scaffold(
       body: Stack(
         children: [
@@ -45,21 +43,21 @@ class Questionscreen extends ConsumerWidget {
                     SizedBox(
                         height: 100,
                         child: CustomBanner(
-                          level: ref.read(level),
+                          level: 5,
                         )),
                     const SizedBox(
                       height: 30,
                     ),
                     QuestionTile(
                        // screenSize: size,
-                        first: question.first,
-                        second: question.second,
-                        sign: question.sign),
+                        first: 6,
+                        second:5,
+                        sign: ""),
                     const SizedBox(
                       height: 30,
                     ),
                     AnswerTile(
-                      answer: question.answer,
+                      answer:4,
                      
                     ),
                     const SizedBox(

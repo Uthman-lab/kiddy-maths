@@ -8,7 +8,6 @@ import 'package:kiddy_maths/screens/scores_screen.dart';
 import 'package:kiddy_maths/utils/local_storage.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 
-import '../controllers/stageController.dart';
 
 class AnswerTile extends ConsumerWidget {
   const AnswerTile({
@@ -52,8 +51,7 @@ class AnswerTile extends ConsumerWidget {
               //   res.shuffle();
               return GestureDetector(
                 onTap: () {
-                  checkAndGoto(context, const ScoresScreen(), ref);
-                  ref.read(scoreController.notifier).score(answer, res[index]);
+                
                 },
                 child: Center(
                   child: Text(
@@ -67,23 +65,5 @@ class AnswerTile extends ConsumerWidget {
     );
   }
 
-  checkAndGoto(BuildContext context, Widget screen, WidgetRef ref) async {
-    if (ref.read(questionCount.notifier).getIsLast()) {
-      MyNavigator.removeAndGoto(context, screen);
-      var key = ref.read(operation);
-
-      int prevLevel = await LocalStorage.retrieve(key.name);
-
-      int? stage = ref.read(openStages).whenData((value) => value).value;
-
-      if (stage == level) {
-        stage = stage! + 1;
-        LocalStorage.store(key.name, stage);
-      }
-
-      ref.read(questionCount.notifier).initialize();
-    } else {
-      ref.read(questionCount.notifier).increment();
-    }
-  }
+  
 }

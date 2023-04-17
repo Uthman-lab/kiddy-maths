@@ -8,10 +8,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kiddy_maths/business_logic/quiz_generator.dart';
-import 'package:kiddy_maths/controllers/stageController.dart';
 import 'package:kiddy_maths/screens/question_screen.dart';
 import 'package:kiddy_maths/utils/local_storage.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
+
+final stages = FutureProvider((ref) => 1);
 
 class LevelsScreen extends StatelessWidget {
   const LevelsScreen({super.key});
@@ -41,9 +42,9 @@ class Levels extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var stages = ref.watch(openStages);
-    
-    return stages.when(
+    var stage = ref.watch(stages);
+
+    return stage.when(
         error: (error, stackTrace) => Center(
               child: Text("$error"),
             ),
@@ -56,19 +57,7 @@ class Levels extends ConsumerWidget {
                   crossAxisCount: 3),
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () {
-                    int currentStage = ref.read(level.notifier).get(1 + index);
-                    Operation operator = ref.read(operation);
-                    List<Question> questions = ref
-                        .read(questionsController.notifier)
-                        .getQuestions(currentStage, operator, openStage);
-
-                    if (questions.isNotEmpty) {
-                      MyNavigator.goto(
-                          context, Questionscreen(questions: questions));
-                    }
-                    ref.read(questionsController.notifier).reset();
-                  },
+                  onTap: () {},
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -81,15 +70,10 @@ class Levels extends ConsumerWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ref
-                                    .watch(questionsController.notifier)
-                                    .checkStatus(openStage, index)
-                                ? Text(
-                                    "${index + 1} ",
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  )
-                                : const Icon(Icons.lock),
+                            Text(
+                              "${index + 1} ",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                             Text(
                               "level",
                               style: Theme.of(context).textTheme.titleMedium,
