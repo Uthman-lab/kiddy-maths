@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="282px" height="280px" viewBox="0 0 282 280" disable-background="new 0 0 282 280" xml:space="preserve">
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="-11" y="-13" width="300" height="300"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<polygon clip-path="url(#SVGID_2_)" fill="#1ACB34" stroke="#1F0524" stroke-width="12.5" stroke-linejoin="round" points="
+		192.247,38.383 192.247,55.758 91.75,55.758 91.75,38.383 31.008,38.383 31.008,178.243 253.128,178.243 253.128,38.383 	"/>
+	
+		<line clip-path="url(#SVGID_2_)" fill="none" stroke="#000000" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round" x1="119.631" y1="12" x2="119.631" y2="21.253"/>
+	
+		<line clip-path="url(#SVGID_2_)" fill="none" stroke="#000000" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round" x1="165.001" y1="12" x2="165.001" y2="21.253"/>
+	
+		<line clip-path="url(#SVGID_2_)" fill="none" stroke="#000000" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round" x1="46.877" y1="267.127" x2="103.388" y2="210.877"/>
+	
+		<line clip-path="url(#SVGID_2_)" fill="none" stroke="#000000" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round" x1="181.253" y1="210.877" x2="237.763" y2="267.127"/>
+	
+		<line clip-path="url(#SVGID_2_)" fill="none" stroke="#000000" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round" x1="142.003" y1="267.127" x2="142.003" y2="210.877"/>
+	<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="141.9521" y1="58.6177" x2="142.0364" y2="22.3284">
+		<stop  offset="0" style="stop-color:#02C25F"/>
+		<stop  offset="1" style="stop-color:#50C95F"/>
+	</linearGradient>
+	
+		<rect x="91.75" y="21.253" clip-path="url(#SVGID_2_)" fill="url(#SVGID_3_)" stroke="#302203" stroke-width="3" stroke-linejoin="round" width="100.497" height="34.497"/>
+	<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="142.0635" y1="210.502" x2="142.0635" y2="178.0986">
+		<stop  offset="0" style="stop-color:#02C25F"/>
+		<stop  offset="1" style="stop-color:#50C95F"/>
+	</linearGradient>
+	<path clip-path="url(#SVGID_2_)" fill="url(#SVGID_4_)" stroke="#000000" stroke-width="6" stroke-linejoin="round" d="
+		M270.128,193.624c-0.676,8.74-8.252,15.324-17,14.746H31.366c-8.83,0.586-16.512-5.94-17.366-14.746
+		c0.789-8.87,8.479-15.511,17.366-14.998h221.762C261.949,178.129,269.518,184.818,270.128,193.624z"/>
+</g>
+</svg>
