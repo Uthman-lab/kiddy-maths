@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kiddy_maths/controllers.dart/levels.dart';
+import 'package:kiddy_maths/controllers.dart/operator_cont.dart';
+import 'package:kiddy_maths/controllers.dart/questions_reg_cont.dart';
 import 'package:kiddy_maths/screens/home_screen.dart';
 import 'package:kiddy_maths/screens/scores_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
@@ -19,7 +22,9 @@ class Questionscreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   
+    final index = ref.watch(questionRegCont);
+    final quest = questions[index];
+    final operator = ref.watch(operatorCont);
     return Scaffold(
       body: Stack(
         children: [
@@ -43,22 +48,21 @@ class Questionscreen extends ConsumerWidget {
                     SizedBox(
                         height: 100,
                         child: CustomBanner(
-                          level: 5,
+                          level: ref.watch(levelsCont) + 1,
                         )),
                     const SizedBox(
                       height: 30,
                     ),
                     QuestionTile(
-                       // screenSize: size,
-                        first: 6,
-                        second:5,
-                        sign: ""),
+                        // screenSize: size,
+                        first: quest.first,
+                        second: quest.second,
+                        sign: operator!.sign),
                     const SizedBox(
                       height: 30,
                     ),
                     AnswerTile(
-                      answer:4,
-                     
+                      answer: quest.answer,
                     ),
                     const SizedBox(
                       height: 30,
@@ -66,7 +70,8 @@ class Questionscreen extends ConsumerWidget {
                     CustomRoundedButton(
                         height: 50,
                         ontap: () {
-                          MyNavigator.removeAndGoto(context, ScoresScreen());
+                          MyNavigator.removeAndGoto(
+                              context, const ScoresScreen());
                         },
                         child: Center(
                             child: Text("Exit",

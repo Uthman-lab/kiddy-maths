@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kiddy_maths/controllers.dart/score_cont.dart';
 import 'package:kiddy_maths/screens/home_screen.dart';
 
 class ScoreAndTimePanel extends ConsumerWidget {
@@ -25,7 +26,7 @@ class ScoreAndTimePanel extends ConsumerWidget {
           height: 50,
           child: Center(
               child: Text(
-            "",
+            "${ref.watch(scoreCont)}",
             style: GoogleFonts.rubikDirt(fontSize: 24),
           )),
         ),

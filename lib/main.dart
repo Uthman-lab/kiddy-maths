@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kiddy_maths/screens/home_screen.dart';
-import 'package:kiddy_maths/screens/levels_screen.dart';
-import 'package:kiddy_maths/screens/question_screen.dart';
-import 'package:kiddy_maths/screens/scores_screen.dart';
 import 'package:kiddy_maths/themes.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

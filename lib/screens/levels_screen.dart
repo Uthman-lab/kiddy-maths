@@ -1,18 +1,12 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kiddy_maths/business_logic/quiz_generator.dart';
+import 'package:kiddy_maths/controllers.dart/levels.dart';
+import 'package:kiddy_maths/controllers.dart/operator_cont.dart';
+import 'package:kiddy_maths/controllers.dart/question_provider.dart';
 import 'package:kiddy_maths/screens/question_screen.dart';
-import 'package:kiddy_maths/utils/local_storage.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
-
-final stages = FutureProvider((ref) => 1);
 
 class LevelsScreen extends StatelessWidget {
   const LevelsScreen({super.key});
@@ -42,31 +36,31 @@ class Levels extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var stage = ref.watch(stages);
+    var stage = ref.watch(levelsCont);
 
-    return stage.when(
-        error: (error, stackTrace) => Center(
-              child: Text("$error"),
-            ),
-        loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-        data: (openStage) {
-          return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {},
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/Fall_Panel.svg",
-                        width: 100,
-                        height: 90,
-                      ),
-                      Center(
+    return GridView.builder(
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              if (stage >= index) {
+                final operator = ref.watch(operatorCont) ;
+                ref.read(questionsCont.notifier).getQuestions(operator!.operation,stage +1);
+                final questions = ref.watch(questionsCont);
+                MyNavigator.goto(context, Questionscreen(questions: questions));
+              }
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SvgPicture.asset(
+                  "assets/Fall_Panel.svg",
+                  width: 100,
+                  height: 90,
+                ),
+                stage >= index
+                    ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -81,10 +75,12 @@ class Levels extends ConsumerWidget {
                           ],
                         ),
                       )
-                    ],
-                  ),
-                );
-              });
+                    : Center(
+                        child: Icon(Icons.lock),
+                      )
+              ],
+            ),
+          );
         });
   }
 }

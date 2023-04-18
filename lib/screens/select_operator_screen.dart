@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kiddy_maths/business_logic/quiz_generator.dart';
+import 'package:kiddy_maths/controllers.dart/operator_cont.dart';
 import 'package:kiddy_maths/screens/levels_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 import 'package:kiddy_maths/widgets/background.dart';
 
+class Operator {
+  final Operation operation;
+  final sign;
+
+  Operator(this.operation, this.sign);
+}
+
 class SelectOperatorScreen extends ConsumerWidget {
   const SelectOperatorScreen({super.key});
 
-  List<Map<String, Object>> operators() {
-    var a = {"operator": Operation.add, "icon": "+"};
-    var b = {"operator": Operation.sub, "icon": "-"};
-    var c = {"operator": Operation.multiply, "icon": "*"};
+  List<Operator> operators() {
+    var a = Operator(Operation.add, "+");
+    var b = Operator(Operation.sub, "-");
+    var c = Operator(Operation.multiply, "*");
+
     return [a, b, c];
   }
 
@@ -73,23 +82,21 @@ class CustomCircularButton extends StatelessWidget {
 class OperatorButton extends ConsumerWidget {
   const OperatorButton({Key? key, required this.operator, this.onTap})
       : super(key: key);
-  final Map<String, Object> operator;
+  final Operator operator;
   final Function()? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    selectOperatorAndNavigate() {
-      Operation newOperator = operator["operator"] as Operation;
-      MyNavigator.goto(context, const LevelsScreen());
-    }
-
     return GestureDetector(
-      onTap: selectOperatorAndNavigate,
+      onTap: () {
+        ref.read(operatorCont.notifier).state = operator;
+        MyNavigator.goto(context, const LevelsScreen());
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             shape: BoxShape.circle, color: Theme.of(context).cardColor),
-        child: Center(child: Text("${operator["icon"]}")),
+        child: Center(child: Text("${operator.sign}")),
       ),
     );
   }

@@ -32,11 +32,9 @@ class QuestionTile extends StatelessWidget {
         children: [
           Text(
             "$first   $sign   $second ",
-            //GoogleFonts.rubikDistressed(fontSize: 42),
           ),
           Text(
             "= ?",
-            //style: GoogleFonts.rubikDistressed(fontSize: 42),
           )
         ],
       ),
