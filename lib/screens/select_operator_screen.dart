@@ -8,7 +8,7 @@ import 'package:kiddy_maths/widgets/background.dart';
 
 class Operator {
   final Operation operation;
-  final sign;
+  final String sign;
 
   Operator(this.operation, this.sign);
 }
@@ -96,7 +96,7 @@ class OperatorButton extends ConsumerWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             shape: BoxShape.circle, color: Theme.of(context).cardColor),
-        child: Center(child: Text("${operator.sign}")),
+        child: Center(child: Text(operator.sign)),
       ),
     );
   }

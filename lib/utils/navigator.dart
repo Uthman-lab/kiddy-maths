@@ -10,9 +10,9 @@ class MyNavigator {
   static Map<String, Widget Function(BuildContext)> routes(
       BuildContext context) {
     return {
-      homeScreen: (context) => HomeScreen(),
-      operatorScreen: (context) => SelectOperatorScreen(),
-      levelScreen: (context) => LevelsScreen()
+      homeScreen: (context) => const HomeScreen(),
+      operatorScreen: (context) => const SelectOperatorScreen(),
+      levelScreen: (context) => const LevelsScreen()
     };
   }
 

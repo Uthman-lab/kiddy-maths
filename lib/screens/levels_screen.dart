@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kiddy_maths/business_logic/quiz_generator.dart';
 import 'package:kiddy_maths/controllers.dart/levels.dart';
 import 'package:kiddy_maths/controllers.dart/operator_cont.dart';
 import 'package:kiddy_maths/controllers.dart/question_provider.dart';
+import 'package:kiddy_maths/controllers.dart/questions_reg_cont.dart';
+import 'package:kiddy_maths/controllers.dart/score_cont.dart';
+import 'package:kiddy_maths/controllers.dart/timer_controller.dart';
 import 'package:kiddy_maths/screens/question_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 
@@ -34,8 +36,14 @@ class Levels extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
+  retrieveStage(WidgetRef ref) {
+    final operator = ref.watch(operatorCont);
+    ref.watch(levelsCont.notifier).retrieve(operator!.operation);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    retrieveStage(ref);
     var stage = ref.watch(levelsCont);
 
     return GridView.builder(
@@ -45,10 +53,21 @@ class Levels extends ConsumerWidget {
           return GestureDetector(
             onTap: () {
               if (stage >= index) {
-                final operator = ref.watch(operatorCont) ;
-                ref.read(questionsCont.notifier).getQuestions(operator!.operation,stage +1);
-                final questions = ref.watch(questionsCont);
-                MyNavigator.goto(context, Questionscreen(questions: questions));
+                final operator = ref.watch(operatorCont);
+                final questions = ref
+                    .watch(questionsCont.notifier)
+                    .getQuestions(operator!.operation, index + 1);
+
+                ref.watch(questionRegCont.notifier).reset();
+                ref.watch(scoreCont.notifier).reset();
+                ref.watch(timerCont.notifier).reset();
+
+                MyNavigator.goto(
+                    context,
+                    Questionscreen(
+                      questions: questions!,
+                      level: index + 1,
+                    ));
               }
             },
             child: Stack(
@@ -75,7 +94,7 @@ class Levels extends ConsumerWidget {
                           ],
                         ),
                       )
-                    : Center(
+                    :const Center(
                         child: Icon(Icons.lock),
                       )
               ],

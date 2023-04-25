@@ -5,10 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kiddy_maths/screens/scores_screen.dart';
-import 'package:kiddy_maths/utils/local_storage.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 
-import '../controllers.dart/answer_cont.dart';
 import '../controllers.dart/question_provider.dart';
 import '../controllers.dart/questions_reg_cont.dart';
 import '../controllers.dart/score_cont.dart';
@@ -58,21 +56,23 @@ class AnswerTile extends ConsumerWidget {
                   bool isCorrect = ref
                       .watch(questionsCont.notifier)
                       .verifyAnswer(answer, res[index]);
-
                   if (isCorrect) {
-                    ref.read(scoreCont.notifier).increment();
-                    ref.read(questionRegCont.notifier).increment();
+                    ref.watch(scoreCont.notifier).increment();
+                    ref.watch(questionRegCont.notifier).increment();
                   } else {
-                    ref.read(questionRegCont.notifier).increment();
+                    ref.watch(questionRegCont.notifier).increment();
                   }
                   final lastIndex =
                       ref.watch(questionsCont.select((value) => value.length)) -
                           1;
+                  print(lastIndex);
+
                   final qIndex = ref.watch(questionRegCont);
-                  print("last is $lastIndex and index is $qIndex");
                   bool isLast = lastIndex == qIndex;
+                  print("islast $lastIndex index $qIndex");
+
                   if (isLast) {
-                    MyNavigator.goto(context, ScoresScreen());
+                    MyNavigator.goto(context, const ScoresScreen());
                   }
                 },
                 child: Center(

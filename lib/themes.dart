@@ -11,9 +11,9 @@ class CustomThemes {
               GoogleFonts.ruslanDisplay(color: Colors.white, fontSize: 24),
           titleLarge: GoogleFonts.ruslanDisplay(fontSize: 40),
         ),
-        primaryIconTheme: IconThemeData(size: 50),
+        primaryIconTheme: const IconThemeData(size: 50),
         cardColor: Colors.green,
         shadowColor: Colors.yellow,
-        iconTheme: IconThemeData(color: Colors.white));
+        iconTheme: const IconThemeData(color: Colors.white));
   }
 }

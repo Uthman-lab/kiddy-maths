@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kiddy_maths/widgets/score_time_tile.dart';
-
-import '../screens/question_screen.dart';
 
 class QuestionTile extends StatelessWidget {
   const QuestionTile(
@@ -33,7 +30,7 @@ class QuestionTile extends StatelessWidget {
           Text(
             "$first   $sign   $second ",
           ),
-          Text(
+          const Text(
             "= ?",
           )
         ],

@@ -7,11 +7,12 @@ final questionsCont = StateNotifierProvider<QuestionsCont, List<Question>>(
 class QuestionsCont extends StateNotifier<List<Question>> {
   QuestionsCont() : super([]);
 
-  void getQuestions(Operation operator, level) {
+  List<Question>? getQuestions(Operation operator, level) {
     try {
-      state = QuizGen().questions(10, operator, level);
+      state = QuizGen().questions(10, operator, level).toList();
+      return state;
     } catch (e) {
-      print("error $e");
+      return null;
     }
   }
 
