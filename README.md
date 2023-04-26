@@ -10,11 +10,33 @@ A fun maths app boast the computational thinking of kids.
  - Endless stages 
  
  ## Screens 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+ - home screen
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ - select operator screen
+   ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+
+ - select level screen
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+
+ - quiz section screen
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+
+ - pause state
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+
+ - scores screen
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+
+
+## state management
+ - flutter riverpod
+
+## Tech Stack
+ - Flutter | Dart
+
+
+## To do
+ - Add background sound for user engagement
+ - Improve user experience
