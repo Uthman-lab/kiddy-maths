@@ -15,15 +15,16 @@ class LevelsCont extends StateNotifier<int> {
         await SaveToPrefs.save(operator, level);
       }
     } catch (e) {
-  /// handle error
-      }
+      /// handle error
+    }
   }
 
-  void retrieve(Operation operator) async {
+  Future<int> retrieve(Operation operator) async {
     try {
       state = await SaveToPrefs.retrieve(operator);
+      return state;
     } catch (e) {
-     /// print("error $e");
+      return 0;
     }
   }
 }

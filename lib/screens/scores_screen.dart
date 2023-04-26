@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kiddy_maths/controllers.dart/current_level.dart';
 import 'package:kiddy_maths/controllers.dart/levels.dart';
 import 'package:kiddy_maths/controllers.dart/operator_cont.dart';
 import 'package:kiddy_maths/controllers.dart/question_provider.dart';
+import 'package:kiddy_maths/controllers.dart/timer_controller.dart';
 import 'package:kiddy_maths/screens/home_screen.dart';
 import 'package:kiddy_maths/screens/levels_screen.dart';
+import 'package:kiddy_maths/screens/question_screen.dart';
+import 'package:kiddy_maths/screens/select_operator_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 
 import '../controllers.dart/score_cont.dart';
@@ -48,6 +52,7 @@ class ScoreBoard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Future.microtask(() => ref.watch(timerCont.notifier).stop());
     return Stack(
       children: [
         SvgPicture.asset(
@@ -60,7 +65,7 @@ class ScoreBoard extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("level ${ref.watch(levelsCont) + 1}"),
+              Text("level ${ref.watch(currentLevelCont)}"),
               const SizedBox(
                 height: 20,
               ),
@@ -93,7 +98,18 @@ class ScoreBoard extends ConsumerWidget {
                       width: 70,
                       ontap: () {
                         checkAndIncreaseLevel(ref);
-                        MyNavigator.removeAndGoto(context, const LevelsScreen());
+                        final operator = ref.watch(operatorCont);
+                        final currentLevel = ref.watch(currentLevelCont);
+                        final questions = ref
+                            .watch(questionsCont.notifier)
+                            .getQuestions(operator!.operation, currentLevel);
+                        MyNavigator.removeAndGoto(
+                            context,
+                            Questionscreen(
+                              level: currentLevel,
+                              questions: questions!,
+                            ));
+                        ref.watch(timerCont.notifier).reset();
                       },
                       child: const Icon(Icons.redo_rounded)),
                   const SizedBox(
@@ -104,7 +120,24 @@ class ScoreBoard extends ConsumerWidget {
                       width: 70,
                       ontap: () {
                         checkAndIncreaseLevel(ref);
-                        MyNavigator.removeAndGoto(context, const LevelsScreen());
+
+                        final operator = ref.watch(operatorCont);
+
+                        ref
+                            .watch(levelsCont.notifier)
+                            .retrieve(operator!.operation)
+                            .then((openedLevels) {
+                          final currentLevel = ref.watch(currentLevelCont);
+                          final nextLevel = currentLevel + 1;
+                          print("runed");
+
+                          gotoNextQuestionsPage(
+                              nextLevel: nextLevel,
+                              openedLevels: openedLevels,
+                              ref: ref,
+                              context: context,
+                              operator: operator);
+                        });
                       },
                       child: const Icon(Icons.arrow_forward)),
                 ],
@@ -117,5 +150,45 @@ class ScoreBoard extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  gotoNextQuestionsPage(
+      {required int nextLevel,
+      required int openedLevels,
+      required WidgetRef ref,
+      required BuildContext context,
+      required Operator operator}) {
+    if (nextLevel <= openedLevels + 1) {
+      final questions = ref
+          .watch(questionsCont.notifier)
+          .getQuestions(operator.operation, nextLevel);
+      ref.read(currentLevelCont.notifier).set(nextLevel);
+      MyNavigator.removeAndGoto(
+          context,
+          Questionscreen(
+            level: nextLevel,
+            questions: questions!,
+          ));
+      ref.watch(timerCont.notifier).reset();
+    } else {
+      const info =
+          "You are not eligible for this level, try passing the current stage";
+      _showDialog(context, info);
+      //TO DO show snack
+
+    }
+  }
+
+  _showDialog(BuildContext context, String info) {
+    showBottomSheet(
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            child: Text(
+              info,
+              softWrap: true,
+            ),
+          );
+        });
   }
 }

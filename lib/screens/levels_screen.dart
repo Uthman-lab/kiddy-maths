@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kiddy_maths/controllers.dart/current_level.dart';
 import 'package:kiddy_maths/controllers.dart/levels.dart';
 import 'package:kiddy_maths/controllers.dart/operator_cont.dart';
 import 'package:kiddy_maths/controllers.dart/question_provider.dart';
@@ -44,62 +45,80 @@ class Levels extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     retrieveStage(ref);
-    var stage = ref.watch(levelsCont);
+    var openedStages = ref.watch(levelsCont);
 
     return GridView.builder(
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemBuilder: (context, index) {
+        itemBuilder: (context, currentStage) {
           return GestureDetector(
             onTap: () {
-              if (stage >= index) {
+              if (openedStages >= currentStage) {
                 final operator = ref.watch(operatorCont);
                 final questions = ref
                     .watch(questionsCont.notifier)
-                    .getQuestions(operator!.operation, index + 1);
+                    .getQuestions(operator!.operation, currentStage + 1);
 
                 ref.watch(questionRegCont.notifier).reset();
                 ref.watch(scoreCont.notifier).reset();
                 ref.watch(timerCont.notifier).reset();
+                ref.read(currentLevelCont.notifier).set(currentStage + 1);
 
                 MyNavigator.goto(
                     context,
                     Questionscreen(
                       questions: questions!,
-                      level: index + 1,
+                      level: currentStage + 1,
                     ));
               }
             },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SvgPicture.asset(
-                  "assets/Fall_Panel.svg",
-                  width: 100,
-                  height: 90,
-                ),
-                stage >= index
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${index + 1} ",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            Text(
-                              "level",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            )
-                          ],
-                        ),
-                      )
-                    :const Center(
-                        child: Icon(Icons.lock),
-                      )
-              ],
+            child: _LevelTile(
+              openedStages: openedStages,
+              currentStage: currentStage,
             ),
           );
         });
+  }
+}
+
+class _LevelTile extends StatelessWidget {
+  const _LevelTile(
+      {Key? key, required this.openedStages, required this.currentStage})
+      : super(key: key);
+
+  final int openedStages;
+  final int currentStage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SvgPicture.asset(
+          "assets/Fall_Panel.svg",
+          width: 100,
+          height: 90,
+        ),
+        openedStages >= currentStage
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${currentStage + 1} ",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      "level",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    )
+                  ],
+                ),
+              )
+            : const Center(
+                child: Icon(Icons.lock),
+              )
+      ],
+    );
   }
 }

@@ -16,6 +16,10 @@ class TimerState extends StateNotifier<MTimer> {
   StreamSubscription? _subscription;
 
   play() {
+    state = MTimer(
+      const Duration(seconds: _limit),
+      true,
+    );
     _subscription = _streamValues(60).listen((s) {
       _limit <= s
           ? instanceDuration = const Duration(seconds: 0)
@@ -28,26 +32,32 @@ class TimerState extends StateNotifier<MTimer> {
     return Stream.periodic(const Duration(seconds: 1), (t) => t);
   }
 
+  stop() {
+    _subscription?.cancel();
+    _subscription = null;
+  }
+
+  bool? isPause() {
+    return _subscription?.isPaused;
+  }
+
   reset() {
-    if (_subscription != null) _subscription!.cancel();
+    if (_subscription != null) {
+      _subscription!.cancel();
+      _subscription = null;
+    }
+
     play();
   }
 
-  pausePlay() {
-    if (state.isPaused) {
-      _resume();
-    } else {
-      _pause();
-    }
-  }
-
-  _pause() {
+  pause() {
     state = MTimer(instanceDuration, true);
     _subscription?.pause();
   }
 
-  _resume() {
+  resume() {
     _subscription?.resume();
+    state = MTimer(instanceDuration, false);
   }
 }
 
@@ -59,13 +69,4 @@ class MTimer {
     this.duration,
     this.isPaused,
   );
-
-  @override
-  bool operator ==(Object other) =>
-      other is MTimer &&
-      isPaused == other.isPaused &&
-      duration == other.duration;
-
-  @override
-  int get hashCode => Object.hash(isPaused.hashCode, duration.hashCode);
 }

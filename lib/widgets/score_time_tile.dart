@@ -55,9 +55,10 @@ class DisplayTime extends ConsumerWidget {
   checkAndEndGame(WidgetRef ref, BuildContext context) {
     final duration = ref.watch(timerCont).duration;
     if (duration.inSeconds == 0) {
-      ref.watch(timerCont.notifier).reset();
-      Future.microtask(
-          () => MyNavigator.removeAndGoto(context, const ScoresScreen()));
+      Future.microtask(() {
+        ref.watch(timerCont.notifier).reset();
+        return MyNavigator.removeAndGoto(context, const ScoresScreen());
+      });
     }
   }
 

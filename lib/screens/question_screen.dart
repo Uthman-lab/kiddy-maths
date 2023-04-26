@@ -8,10 +8,12 @@ import 'package:kiddy_maths/controllers.dart/operator_cont.dart';
 import 'package:kiddy_maths/controllers.dart/questions_reg_cont.dart';
 import 'package:kiddy_maths/screens/home_screen.dart';
 import 'package:kiddy_maths/screens/scores_screen.dart';
+import 'package:kiddy_maths/screens/select_operator_screen.dart';
 import 'package:kiddy_maths/utils/navigator.dart';
 
 import '../business_logic/quiz_generator.dart';
 import '../controllers.dart/timer_controller.dart';
+import '../widgets/alerts.dart';
 import '../widgets/answer_tile.dart';
 import '../widgets/banner.dart';
 import '../widgets/question_tile.dart';
@@ -110,7 +112,14 @@ class PlayPause extends ConsumerWidget {
     return CustomRoundedButton(
       height: 50,
       ontap: () {
-        ref.watch(timerCont.notifier).pausePlay();
+        ref.watch(timerCont.notifier).pause();
+        showDialog(
+            context: context,
+            builder: (context) {
+              return CustomAlert(
+                ref: ref,
+              );
+            });
       },
       child: Center(
           child: Icon(ref.watch(timerCont.select((value) => value.isPaused))
