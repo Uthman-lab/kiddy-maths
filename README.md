@@ -1,6 +1,6 @@
 # kiddy_maths
 
-A fun maths app boast the computational thinking of kids.
+A fun maths app to boast the computational thinking of kids.
 
 ## Features of the app
 
