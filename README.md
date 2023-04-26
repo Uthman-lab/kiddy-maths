@@ -12,22 +12,22 @@ A fun maths app boast the computational thinking of kids.
  ## Screens 
 
  - home screen
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/start_screen.png)
 
  - select operator screen
    ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
 
  - select level screen
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/stages_screen.png)
 
  - quiz section screen
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/question_screen.png)
 
  - pause state
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/pause_screen.png)
 
  - scores screen
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png)
+  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/score_screen.png)
 
 
 ## state management
