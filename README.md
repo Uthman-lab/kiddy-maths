@@ -12,6 +12,7 @@ A fun maths app boast the computational thinking of kids.
  ## Screens 
 
  - home screen
+  <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/start_screen.png" width="100">
   ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/start_screen.png | width=200)
 
  - select operator screen
