@@ -12,23 +12,22 @@ A fun maths app boast the computational thinking of kids.
  ## Screens 
 
  - home screen
-  <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/start_screen.png" width="100">
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/start_screen.png | width=200)
+  <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/start_screen.png" width="300">
 
  - select operator screen
-   ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png | width=200)
+  <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/operator_screen.png" width="300">
 
  - select level screen
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/stages_screen.png | width=200)
+  <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/stages_screen.png" width="300">
 
  - quiz section screen
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/question_screen.png | width=200)
+  <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/question_screen.png" width="300">
 
  - pause state
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/pause_screen.png | width=200)
+  <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/pause_screen.png" width="300">
 
  - scores screen
-  ![alt text](https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/score_screen.png | width=200)
+   <img src="https://github.com/Uthman-lab/kiddy-maths/blob/main/assets/score_screen.png" width="300">
 
 
 ## state management
