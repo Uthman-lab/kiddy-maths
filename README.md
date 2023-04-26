@@ -1,11 +1,15 @@
 # kiddy_maths
 
-A new Flutter project.
+A fun maths app boast the computational thinking of kids.
 
-## Getting Started
+## Features of the app
 
-This project is a starting point for a Flutter application.
-
+ - A generator that generates questions for (+,-,/,*) operators
+ - A timer to keep track of time spent on each set of questions
+ - A score board to display the scores
+ - Endless stages 
+ 
+ ## Screens 
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
